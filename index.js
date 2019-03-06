@@ -17,7 +17,6 @@ http.createServer(function server_listener(req, res) {
   })
 }).listen(3000);
 
-
 const handlers = {
   home: function home_handler(callback) {
     callback(200, {
