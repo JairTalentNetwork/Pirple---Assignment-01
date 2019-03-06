@@ -6,7 +6,7 @@ http.createServer(function server_listener(req, res) {
   req.on('data', function data_stream(){
   })
   req.on('end', function end_of_request_payload() {
-    var choose_handler = req.url === '/home' ? routes.home : routes.not_found;
+    var choose_handler = req.url === '/hello' ? routes.hello : routes.not_found;
     console.log('Handler chooose')
     choose_handler(function handler_callback(status, data) {
       status = (typeof status) === 'number' ? status : 400;
@@ -18,7 +18,7 @@ http.createServer(function server_listener(req, res) {
 }).listen(3000);
 
 const handlers = {
-  home: function home_handler(callback) {
+  hello: function hello_handler(callback) {
     callback(200, {
       html: `
     <div style="background-color:rgb(100,100,255); width: 100%; height: 100%;">
@@ -39,6 +39,6 @@ const handlers = {
 }
 
 const routes = {
-  home: handlers.home,
+  hello: handlers.hello,
   not_found: handlers.not_found
 }
