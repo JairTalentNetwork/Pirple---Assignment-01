@@ -3,14 +3,15 @@ const http = require('http');
 
 
 http.createServer(function server_listener(req, res) {
-  req.on('data', function data_stream(){
-  })
+  req.on('data', function data_stream() {})
   req.on('end', function end_of_request_payload() {
     var choose_handler = req.url === '/hello' ? routes.hello : routes.not_found;
     console.log('Handler chooose')
     choose_handler(function handler_callback(status, data) {
       status = (typeof status) === 'number' ? status : 400;
-      data = (typeof data) === 'object' ? data : `Something is wrong with your html text`;
+      data = (typeof data) === 'object' ? data : {
+        html: `Something is wrong with your html text`
+      };
       res.write(data.html);
       res.end();
     })
